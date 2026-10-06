@@ -3,9 +3,15 @@
 
     <xacro:property name="FOV" value="60" />
 
-    <!--TODO Adding differential drive - add the DiffDrive plugin here.-->
-
-    <!-- End Adding differential drive -->
+    <gazebo>
+        <plugin filename="gz-sim-diff-drive-system" name="gz::sim::systems::DiffDrive">
+            <left_joint>left_wheel_joint</left_joint>
+            <right_joint>right_wheel_joint</right_joint>
+            <wheel_separation>${base_width + wheel_length}</wheel_separation>
+            <wheel_radius>${wheel_radius}</wheel_radius>
+            <topic>/model/my_robot/cmd_vel</topic>
+        </plugin>
+    </gazebo>
 
 
     <gazebo reference="caster_wheel_link">  

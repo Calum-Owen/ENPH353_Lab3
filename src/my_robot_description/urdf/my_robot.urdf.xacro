@@ -62,9 +62,48 @@
         
     </link>
 
-    <!--TODO Adding wheels links - add "right_wheel_link" and "left_wheel_link" here-->
-    
-    <!-- End Adding wheels links -->
+    <link name="left_wheel_link">
+        <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" l="${wheel_length}" 
+        o_xyz="0 0 0" o_rpy="0 0 0" />
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+        </collision>
+
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0 " />
+            <material name="yellow" />
+        </visual>
+
+    </link>
+
+    <link name="right_wheel_link">
+        <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" l="${wheel_length}" 
+        o_xyz="0 0 0" o_rpy="0 0 0" />
+
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+        </collision>
+
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0 " />
+            <material name="yellow" />
+        </visual>
+
+    </link>
+
 
     <link name="caster_wheel_link">
         <xacro:sphere_inertia m="0.5" r="${wheel_radius / 2.0}"  o_xyz="0 0 0" o_rpy="0 0 0" />
@@ -93,6 +132,21 @@
         <origin xyz="${base_length / 2} 0 ${base_height}" rpy="0 0 0" />
     </joint>
 
+    <joint name="left_wheel_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="left_wheel_link" />
+        <origin xyz="${-base_length / 4.0} ${base_width / 2.0 + wheel_length / 2.0} 0" rpy="1.5708 0 0" />
+        <axis xyz="0 0 1" />
+
+    </joint>
+
+    <joint name="right_wheel_joint" type="continuous">
+        <parent link="base_link" />
+        <child link="right_wheel_link" />
+        <origin xyz="${-base_length / 4.0} ${-(base_width / 2.0 + wheel_length / 2.0)} 0" rpy="1.5708 0 0" />
+        <axis xyz="0 0 1" />
+
+    </joint>
     <!-- TODO Adding wheels joints - add a joint to the base_link for each wheel-->
     
     <!-- End Adding wheels joints -->
